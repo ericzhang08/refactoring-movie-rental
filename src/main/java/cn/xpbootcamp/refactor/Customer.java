@@ -21,18 +21,32 @@ public class Customer {
     }
 
     String statement() {
+        StringBuilder result = addHeader();
+        result.append(addBody());
+        result.append(addFooter());
+        return result.toString();
+    }
 
-        StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
+    private String  addFooter() {
+        StringBuilder result = new StringBuilder();
+        result.append("Amount owed is ").append(calculateTotalAmount()).append("\n");
+        result.append("You earned ").append(calculateFrequentRenterPoints()).append(" frequent renter points");
+        return result.toString();
+    }
+
+    private String addBody() {
+        StringBuilder result = new StringBuilder();
         for (Rental rental : this.rentals) {
             result.append("\t")
                   .append(rental.getMovie().getTitle())
                   .append("\t")
                   .append(rental.getAmount()).append("\n");
         }
-        //add footer lines
-        result.append("Amount owed is ").append(calculateTotalAmount()).append("\n");
-        result.append("You earned ").append(calculateFrequentRenterPoints()).append(" frequent renter points");
         return result.toString();
+    }
+
+    private StringBuilder addHeader() {
+        return new StringBuilder("Rental Record for " + getName() + "：\n");
     }
 
     private double calculateTotalAmount() {
