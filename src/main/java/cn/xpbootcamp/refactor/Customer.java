@@ -23,10 +23,8 @@ public class Customer {
     String statement() {
         double totalAmount = 0d;
         int frequentRenterPoints = 0;
-        Enumeration<Rental> rentals = this.rentals.elements();
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
-        while (rentals.hasMoreElements()) {
-            Rental each = rentals.nextElement();
+        for (Rental each : this.rentals) {
             //show figures for this rental
             //determine amounts for each line
             double thisAmount = each.getAmount();
