@@ -22,10 +22,6 @@ public class Customer {
 
     String statement() {
 
-        int frequentRenterPoints = calculateFrequentRenterPoints();
-
-        double totalAmount = calculateTotalAmount();
-
         StringBuilder result = new StringBuilder("Rental Record for " + getName() + "：\n");
         for (Rental rental : this.rentals) {
             result.append("\t")
@@ -34,8 +30,8 @@ public class Customer {
                   .append(rental.getAmount()).append("\n");
         }
         //add footer lines
-        result.append("Amount owed is ").append(totalAmount).append("\n");
-        result.append("You earned ").append(frequentRenterPoints).append(" frequent renter points");
+        result.append("Amount owed is ").append(calculateTotalAmount()).append("\n");
+        result.append("You earned ").append(calculateFrequentRenterPoints()).append(" frequent renter points");
         return result.toString();
     }
 
